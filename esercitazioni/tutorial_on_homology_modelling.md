@@ -21,17 +21,18 @@ minutes: 45
 
 > ## Learning Outcomes
 > By the end of this lesson, the learner will be able to:
-> * List and discuss the Homology modelling principles
+> 
+> * List and discuss homology modelling principles
 > * Describe the tools for homology modelling available at https://toolkit.tuebingen.mpg.de/#/
 > * Justify the choice of a given template over the others
-> * Build the homology model of Gadd45β using HHPred 
-> * Do model quality assessment using QMEAN
-> * Point to relevant information on how to get help.
+> * Build the homology model of the vascular endothelial growth factor 1 domain 4 VEGFR1_D4  using HHPred 
+> * Assess the quality of the model using QMEAN
+> * Point to relevant information on how to get help
+> 
 
 ------------
 
-
-In this tutorial we will see how to build the homology model of Gadd45β. 
+In this tutorial we will see how to build the homology model of VEGFR1_D4. 
 
 Let's start with some introduction on the three-dimensional (3D) structure of proteins. 
 Where can we find the spatial coordinates of biological macromolecules? 
@@ -154,7 +155,7 @@ Loop modelling: a search is made through the PDB for known loops containing endp
 ### Step 8: Iteration to correct mistakes
 * When errors in the model are recognised and located, they can be corrected by iterating portions of the homology modeling process. 
 * Small errors that are introduced during the optimisation step can be removed by running a shorter molecular dynamics simulation 
-* A error in a loop can be corrected by choosing another loop conformation in the loop modeling step
+* An error in a loop can be corrected by choosing another loop conformation in the loop modeling step
 * Large mistakes in the backbone conformation sometimes require the complete process to be repeated with another alignment or even with a different template 
 
 Valuable resources for homology modelling are MODELLER and SWISS-MODEL.
@@ -168,16 +169,37 @@ Valuable resources for homology modelling are MODELLER and SWISS-MODEL.
 <img src= "img/swiss_model_2.png" width="50%">
 
 
-### Homology model of Gadd45β
+### Homology model of VEGFR1_D4
 
-1) First, we have to identify the protein sequence of Gadd45β. 
-Go to UniProt (http://www.uniprot.org), type the Gadd45β UniProt AC (O75293) in the text box at the top and click on Search. On the result page, go to the sequence information (you can scroll-down until you reach the Sequence section or directly click on the "Sequence" link on the left). Click on the FASTA link and copy the sequence in FASTA format. 
+---------
+> ### Input data:
+> Entire protein: Uniprot: P17948, VGFR1_HUMAN
+> Region to be modelled: VEGFR1_D4, vascular endothelial growth factor 1 domain 4 <br>
+> Sequence: <br>
+> \>VEGFR1_D4
+TSVHIYDKAFITVKHRKQQVLETVAGKRSYRLSMKVKAFPSPEVVWLKDGLPATEKSARYLTRGYSLIIKDVTEEDAGNYTILLSIKQSNVFKNLTATLIVNVKPQIYEKAVSSFPDPALYP
+> By running BLAST, the first match is the vascular endothelial growth factor receptor 1 isoform 4 precursor 
+> 
+> \>sp|P17948-4|VGFR1_HUMAN Isoform 4 of Vascular endothelial growth factor receptor 1 OS=Homo sapiens OX=9606 GN=FLT1 <br>
+MVSYWDTGVLLCALLSCLLLTGSSSGSKLKDPELSLKGTQHIMQAGQTLHLQCRGEAAHK
+WSLPEMVSKESERLSITKSACGRNGKQFCSTLTLNTAQANHTGFYSCKYLAVPTSKKKET
+ESAIYIFISDTGRPFVEMYSEIPEIIHMTEGRELVIPCRVTSPNITVTLKKFPLDTLIPD
+GKRIIWDSRKGFIISNATYKEIGLLTCEATVNGHLYKTNYLTHRQTNTIIDVQISTPRPV
+KLLRGHTLVLNCTATTPLNTRVQMTWSYPDEKNKRASVRRRIDQSNSHANIFYSVLTIDK
+MQNKDKGLYTCRVRSGPSFKSVNTSVHIYDKAFITVKHRKQQVLETVAGKRSYRLSMKVK
+AFPSPEVVWLKDGLPATEKSARYLTRGYSLIIKDVTEEDAGNYTILLSIKQSNVFKNLTA
+TLIVNVKPQIYEKAVSSFPDPALYPLGSRQILTCTAYGIPQPTIKWFWHPCNHNHSEARC
+DFCSNNEESFILDADSNMGNRIESITQRMAIIEGKNKLPPANSSFMLPPTSFSSNYFHFL
+P
 
-<img src= "img/gadd45_fasta.png" width="60%">
+The region to be modelled corresponds to amino acids 324-445.
 
-2) Second, we have to identify a suitable template for Gadd45β. 
-Go to HHPred and paste the Gadd45β in FASTA format into the Input text box. Inspect all the Search Options (but keep the default ones).
-In the "Job Options" section, specify a Job-ID (e.g. gadd45B). Then Submit your job. The run may last up to a few minutes. However, Gadd45β is a small protein (160 aa) and the template search should be quite fast.
+---------
+
+1) First, we have to identify a suitable template for VEGFR1_D4. 
+
+Go to [HHPred](https://toolkit.tuebingen.mpg.de/#/tools/hhpred) and paste the VEGFR1_D4 in FASTA format into the Input text box. Inspect all the Parameter options (but keep the default ones).
+In the "Job Options" section, specify a Job-ID (e.g. vegfr1_d4). Then Submit your job. The run may last up to a few minutes. However, VEGFR1_D4 is a small domain (122 aa = 82 aa + 20 aa at the N-term + 20 aa at the C-term) and the template search should be quite fast.
 
 <img src= "img/hhpred_homepage.png" width="60%">
 
@@ -190,7 +212,7 @@ In the "Job Options" section, specify a Job-ID (e.g. gadd45B). Then Submit your 
 * Which is the best one? 
 * Why? 
 
-4) Go to the alignment between Gadd45β and its best template and take sometime to inspect it. 
+4) Go to the alignment between VEGFR1_D4 and its best template and take sometime to inspect it. 
 * Is it reliable? 
 * Do you think it might be manually improved? 
 * Has it a good coverage?
@@ -198,22 +220,23 @@ In the "Job Options" section, specify a Job-ID (e.g. gadd45B). Then Submit your 
 * What is the e-value? 
 * Are the values of these two parameters good enough to proceed with the model building?
 
-5) Once you are satisfied with the best template inspection, select it, then click on the "Create model" link immediately below the "Result, Histogram, etc." menu bar. In the resulting page, check whether the selected best template is the one that you actually selected, then click on the "Create model from manually selected template(s)" button.
-You will end up in the "Modeller" page. The target-template alignment will appear in the Input text box ("Paste multiple alignment"). 
+5) Once you are satisfied with the best template inspection, select it, then click on the "Model using selection" link in the menu bar. In the resulting page, the target-template alignment will appear in the Input text box ("Paste multiple alignment"). 
 
 <img src= "img/target_template_alignment.png" width="50%">
 
+In order to build the model with Modeller, you have to click on the "Send to Modeller" button.
 
-Notice that, if you want to run a local version of Modeller, you have to copy this alignment and paste it to a local text file with .ali extension. This is NOT what we are going to do here. Here, we will use the Modeller installation provided by The Bioinformatics Toolkit. Therefore, check the options and insert a MODELLER-key (you can use "MODELIRANJE") and a name for your Job in the Job-ID text box (I suggest "gadd45B_model" or something similar). 
+Notice that, if you want to run a local version of Modeller, you have to copy this alignment and paste it to a local text file with .ali extension. This is NOT what we are going to do here. Here, we will use the Modeller installation provided by The Bioinformatics Toolkit. Therefore, check the options and insert a MODELLER-key (you can use "MODELIRANJE") and a name for your Job in the Job-ID text box. 
 
 <img src= "img/hhpred_modeller.png" width="50%">
 
 Then, Submit your Job.
 
-#### Congratulations! You have built a model for Gadd45β. You can Save it now. 
+#### Congratulations! You have built a model for VEGFR1_D4. You can Save it now. 
 
 After downloading it, open the file with your favourite Text Editor (gedit, vim, pico, nano, etc) and take a few minutes to inspect the file.
-Before going back to the prediction of the Gadd45β-MKK7 complex, we will spend a few minutes to check the quality of our model. 
+
+We will now spend a few minutes to check the quality of our model. 
 
 # Model quality assessment with QMEAN
 

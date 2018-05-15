@@ -13,7 +13,7 @@ minutes: 45
 > * Introduce Homology modelling principles
 > * Learn about online tools to build a model by homology
 > * Critically select templates
-> * Build the homology model of Gadd45β using HHPred 
+> * Build the homology model of VEGFR1_D4 using HHPred 
 > * Do model quality assessment using QMEAN
 > * Point to relevant information on how to get help, and understand how to ask well formulated questions
 
@@ -178,7 +178,8 @@ Valuable resources for homology modelling are MODELLER and SWISS-MODEL.
 > Sequence: <br>
 > \>VEGFR1_D4
 TSVHIYDKAFITVKHRKQQVLETVAGKRSYRLSMKVKAFPSPEVVWLKDGLPATEKSARYLTRGYSLIIKDVTEEDAGNYTILLSIKQSNVFKNLTATLIVNVKPQIYEKAVSSFPDPALYP
-> By running BLAST, the first match is the vascular endothelial growth factor receptor 1 isoform 4 precursor 
+>
+> By running BLAST, the first match is the vascular endothelial growth factor receptor 1 isoform 4 precursor:
 > 
 > \>sp|P17948-4|VGFR1_HUMAN Isoform 4 of Vascular endothelial growth factor receptor 1 OS=Homo sapiens OX=9606 GN=FLT1 <br>
 MVSYWDTGVLLCALLSCLLLTGSSSGSKLKDPELSLKGTQHIMQAGQTLHLQCRGEAAHK
@@ -191,12 +192,21 @@ AFPSPEVVWLKDGLPATEKSARYLTRGYSLIIKDVTEEDAGNYTILLSIKQSNVFKNLTA
 TLIVNVKPQIYEKAVSSFPDPALYPLGSRQILTCTAYGIPQPTIKWFWHPCNHNHSEARC
 DFCSNNEESFILDADSNMGNRIESITQRMAIIEGKNKLPPANSSFMLPPTSFSSNYFHFL
 P
-
+>
 The region to be modelled corresponds to amino acids 324-445.
-
+>
+>NOTE: The crystal structure of VEGFR1 was determnined at 4 Å. When you run BLAST this is the first output. However, the resolution is very low and the alignment should be discarded. 
+>
 ---------
+1) First, let's see how we can retrieve the sequence of VEGFR1_D4.
 
-1) First, we have to identify a suitable template for VEGFR1_D4. 
+Go to the [NCBI website](https://www.ncbi.nlm.nih.gov/gene) and type "vascular endothelial growth factor receptor 1 AND human".
+In the output page, select FLT1, which is the gene name of the protein we are looking for.
+In the FLT1 page, click on "NCBI Reference Sequences (RefSeq)" link on the right menu.
+Identify the Isoform 1 from the mRNA and Protein(s) section and click on the identifier after the arrow (NP_002010.2) to open the GenPept page. Use the top right menu to change the region shown from aa 310-450.
+Save the resulting sequence in FASTA format.  
+
+2) Second, we have to identify a suitable template for VEGFR1_D4. 
 
 Go to [HHPred](https://toolkit.tuebingen.mpg.de/#/tools/hhpred) and paste the VEGFR1_D4 in FASTA format into the Input text box. Inspect all the Parameter options (but keep the default ones).
 In the "Job Options" section, specify a Job-ID (e.g. vegfr1_d4). Then Submit your job. The run may last up to a few minutes. However, VEGFR1_D4 is a small domain (122 aa = 82 aa + 20 aa at the N-term + 20 aa at the C-term) and the template search should be quite fast.
@@ -249,7 +259,7 @@ In protein structure prediction, a considerable number of alternative models are
 QMEAN was tested on several standard decoy sets including a molecular dynamics simulation decoy set as well as on a comprehensive data set of totally 22,420 models from server predictions for the 95 targets of CASP7. In a comparison to five well-established model quality assessment programs, QMEAN shows a statistically significant improvement over nearly all quality measures describing the ability of the scoring function to identify the native structure and to discriminate good from bad models. The three-residue torsion angle potential turned out to be very effective in recognizing the native fold (Benkert P, Tosatto SC, Schomburg D. Proteins. 2008 Apr;71(1):261-77).
 
 
-Go to the help page of the [QMEAN Server for Model Quality Estimation](http://swissmodel.expasy.org/qmean/cgi/index.cgi) and carefully read it. Then go to the [Submit new](http://swissmodel.expasy.org/qmean) page, provide a name for your project (I suggest gadd45B_model_quality) and upload the gadd45B_model.pdb file and submit your job. Notice that the quality assessment may take some time. The QMEAN output is described below. Try to find out what is the quality of your model using the QMEAN help pages.
+Go to the help page of the [QMEAN Server for Model Quality Estimation](http://swissmodel.expasy.org/qmean/cgi/index.cgi) and carefully read it. Then go to the [Submit new](http://swissmodel.expasy.org/qmean) page, provide a name for your project and upload the VEGFR1_D4.pdb file and submit your job. Notice that the quality assessment may take some time. The QMEAN output is described below. Try to find out what is the quality of your model using the QMEAN help pages.
 
 
 <img src= "img/qmean_1.png" width="50%"><img src= "img/qmean_2.png" width="50%">
